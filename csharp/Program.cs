@@ -44,27 +44,19 @@ foreach (var line in plannedGrid.Zip(actualGrid))
     var fertilizerAfterLeavingCell = int.Parse(actual[j..(j + 2)].ToString());
     var fertilizerDelta = currentFertilizer - fertilizerAfterLeavingCell;
     var expectedExpenditure = int.Parse(expected[i].ToString());
-    Console.WriteLine($"Previous fertilizer amount was {currentFertilizer} - after leaving cell it's {fertilizerAfterLeavingCell}");
 
     if (fertilizerDelta < expectedExpenditure)
     {
-      Console.WriteLine("Underspread!");
       underSpreadCells++;
     }
     else if (fertilizerDelta > expectedExpenditure)
     {
-      Console.WriteLine("Overspread!");
       overSpreadCells++;
-    }
-    else
-    {
-      Console.WriteLine("Correct spread!");
     }
 
     i += 1;
     j += 2;
     currentFertilizer = fertilizerAfterLeavingCell;
-    Console.WriteLine();
   }
 }
 
