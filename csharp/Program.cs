@@ -28,22 +28,21 @@ if (plannedGrid.Length != actualGrid.Length)
   Environment.Exit(1);
 }
 
-var currentFertilizer = int.Parse(sections[1]);
 var totalCellCount = Math.Pow(actualGrid.Length, 2);
+var initialFertilizerLevel = int.Parse(sections[1]);
 var overSpreadCells = 0;
 var underSpreadCells = 0;
 
-foreach (var line in plannedGrid.Zip(actualGrid))
+foreach (var (plan, actual) in plannedGrid.Zip(actualGrid))
 {
-  var (expected, actual) = line;
   var i = 0;
   var j = 0;
 
-  while (i < expected.Length && j < actual.Length - 1)
+  while (i < plan.Length && j < actual.Length - 1)
   {
-    var fertilizerAfterLeavingCell = int.Parse(actual[j..(j + 2)].ToString());
-    var fertilizerDelta = currentFertilizer - fertilizerAfterLeavingCell;
-    var expectedExpenditure = int.Parse(expected[i].ToString());
+    var newFertilizerLevel = int.Parse(actual[j..(j + 2)].ToString());
+    var fertilizerDelta = initialFertilizerLevel - newFertilizerLevel;
+    var expectedExpenditure = int.Parse(plan[i].ToString());
 
     if (fertilizerDelta < expectedExpenditure)
     {
@@ -56,7 +55,7 @@ foreach (var line in plannedGrid.Zip(actualGrid))
 
     i += 1;
     j += 2;
-    currentFertilizer = fertilizerAfterLeavingCell;
+    initialFertilizerLevel = newFertilizerLevel;
   }
 }
 
