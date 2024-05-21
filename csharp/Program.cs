@@ -4,30 +4,24 @@ const char sectionDelimiter = '|';
 const char gridLineDelimiter = ';';
 const int numberOfSections = 3;
 
-if (args.Length != 1)
+void Assert(bool condition, string message)
 {
-  Console.Error.WriteLine("Program expects exactly one argument.");
-  Environment.Exit(1);
+  if (!condition)
+  {
+    Console.Error.WriteLine(message);
+    Environment.Exit(1);
+  }
 }
 
+Assert(args.Length == 1, "Program expects exactly one argument.");
 var input = args[0];
 var sections = input.Split(sectionDelimiter);
 
-if (sections.Length != numberOfSections)
-{
-  Console.Error.WriteLine($"Input should consist of {numberOfSections} sections delimited by a '{sectionDelimiter}' character.");
-  Environment.Exit(1);
-}
-
+Assert(sections.Length == numberOfSections, $"Input should consist of {numberOfSections} sections delimited by a '{sectionDelimiter}' character.");
 var plannedGrid = sections[0].Split(gridLineDelimiter);
 var actualGrid = sections[2].Split(gridLineDelimiter);
 
-if (plannedGrid.Length != actualGrid.Length)
-{
-  Console.Error.WriteLine($"Lengths of planned and actual grid inputs must be the same.");
-  Environment.Exit(1);
-}
-
+Assert(plannedGrid.Length == actualGrid.Length, "Lengths of planned and actual grid inputs must be the same.");
 var totalCellCount = Math.Pow(actualGrid.Length, 2);
 var initialFertilizerLevel = int.Parse(sections[1]);
 var overSpreadCells = 0;
