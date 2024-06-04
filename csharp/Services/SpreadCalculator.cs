@@ -15,13 +15,23 @@ namespace SpreadyMcSpreader.Services
         /// <returns>A string showing the number of incorrectlySpread | overSpread | underSpread | accuracy %</returns>
         public string Calculate(string input)
         {
-            try
+            if (String.IsNullOrEmpty(input))
             {
-                var inputParts = input.Split(INPUT_SEPARATOR);
+                throw new ArgumentNullException(input);
+            }
 
-                var plannedSpreadMap = inputParts[0].Split(MAP_ROW_SEPARATOR);
-                var startingAmtOfFertilizer = int.Parse(inputParts[1]);
+            var inputParts = input.Split(INPUT_SEPARATOR);
+
+            if (inputParts.Length < 3)
+            {
+                throw new ArgumentException("Invalid input. String should have 3 inputs separated by |.");
+            }
+
+            try
+            {               
+                var plannedSpreadMap = inputParts[0].Split(MAP_ROW_SEPARATOR);                
                 var actualSpreadMap = inputParts[2].Split(MAP_ROW_SEPARATOR);
+                var startingAmtOfFertilizer = int.Parse(inputParts[1]);
 
                 int n = plannedSpreadMap.Length;
                 int incorrectlySpread = 0, overSpread = 0, underSpread = 0, correctSpread = 0;

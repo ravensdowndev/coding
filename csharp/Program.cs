@@ -21,6 +21,10 @@ namespace SpreadyMcSpreader
                 {
                     Console.WriteLine($"An error occurred: {ex.Message}");
                 }
+                finally
+                {
+                    Console.ReadKey();
+                }
             }
         }
     }
