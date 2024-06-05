@@ -29,9 +29,9 @@ namespace SpreadyMcSpreader.Services
 
             try
             {               
-                var plannedSpreadMap = inputParts[0].Split(MAP_ROW_SEPARATOR);                
-                var actualSpreadMap = inputParts[2].Split(MAP_ROW_SEPARATOR);
-                var startingAmtOfFertilizer = int.Parse(inputParts[1]);
+                string[] plannedSpreadMap = inputParts[0].Split(MAP_ROW_SEPARATOR);
+                string[] actualSpreadMap = inputParts[2].Split(MAP_ROW_SEPARATOR);
+                int startingAmtOfFertilizer = int.Parse(inputParts[1]);
 
                 int n = plannedSpreadMap.Length;
                 int incorrectlySpread = 0, overSpread = 0, underSpread = 0, correctSpread = 0;
@@ -70,7 +70,7 @@ namespace SpreadyMcSpreader.Services
                 }
 
                 int totalCells = n * n;
-                var accuracy = Math.Round((double)correctSpread / totalCells * 100);
+                int accuracy = (int)Math.Round((double)correctSpread / totalCells * 100);
 
                 string result = $"{incorrectlySpread}|{overSpread}|{underSpread}|{accuracy}";
                 return result;

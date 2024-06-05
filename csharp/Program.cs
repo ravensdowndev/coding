@@ -14,7 +14,7 @@ namespace SpreadyMcSpreader
                 var spreadCalculatorService = scope.Resolve<ISpreadCalculator>();
                 try
                 {
-                    var result = spreadCalculatorService.Calculate(args[0]);
+                    string result = spreadCalculatorService.Calculate(args[0]);
                     Console.WriteLine(result);
                 }
                 catch (Exception ex)
