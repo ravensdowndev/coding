@@ -15,9 +15,6 @@
         private int UnderSpreadCount { get; set; } = 0;
         private int CorrectSpreadCount { get; set; } = 0;
 
-
-
-
         public string CalculateStatistics(string inputData)
         {
             // Split the raw input into planned, starting and remaining sections
@@ -33,10 +30,11 @@
             //Check these are matching sizes and square
             ValidateRowStrings(plannedRowStrings, remainingRowStrings);
 
+            // Perform calculation
             ClearStatistics();
-
             CalculateStatistics(plannedRowStrings, remainingRowStrings);
 
+            // Format the result.
             return FormatResults(); 
         }
 
@@ -104,7 +102,6 @@
             return result;
         }
 
-
         private void ClearStatistics()
         {
             PreviousAmount = InitialAmount;
@@ -153,11 +150,6 @@
             }
 
             InitialAmount = amount;
-        }
-
-        public string GetHello()
-        {
-            return "Hello world.";
         }
     }
 }
