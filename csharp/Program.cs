@@ -1,4 +1,5 @@
 ﻿using System;
+using SpreadyCalculator;
 
 namespace SpreadyMcSpreader
 {
@@ -6,7 +7,15 @@ namespace SpreadyMcSpreader
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(args[0]);
+            var calculator = new SimpleCalculator();
+            try
+            {
+                Console.WriteLine(calculator.CalculateStatistics(args[0]));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An Error occurred: {ex.Message}");
+            }
         }
     }
 }
